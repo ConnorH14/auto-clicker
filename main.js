@@ -1,6 +1,6 @@
 document.oncontextmenu = new Function("return false;")
 
-let tempalte = /*html*/ `
+let template = /*html*/ `
   <div class="container-fluid py-5 mt-5">
     <div class="row d-flex justify-content-center">
       <div class="col-1 counter-display">
@@ -16,15 +16,15 @@ let tempalte = /*html*/ `
       </div>
 
       <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-1-col">
-        <div onclick="targetClick(0)" class="clicker-target-1 my-auto">
+        <div onclick="targetClick('grunt')" class="clicker-target-1 my-auto">
         </div>
       </div>
       <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-2-col">
-        <div onclick="targetClick(1)" class="clicker-target-2 my-auto">
+        <div onclick="targetClick('jackal')" class="clicker-target-2 my-auto">
         </div>
       </div>
       <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-3-col">
-        <div onclick="targetClick(2)" class="clicker-target-3 my-auto">
+        <div onclick="targetClick('elite')" class="clicker-target-3 my-auto">
         </div>
       </div>
 
@@ -60,8 +60,20 @@ function startGame(){
   startDisplay.classList.add("hidden")
 
   const gameDisplay = document.getElementById("game-display")
-  gameDisplay.innerHTML = tempalte
-  gameUpdate()
+  gameDisplay.innerHTML = template
+  //gameUpdate()
+}
+
+function targetClick(targetType){
+  if(targetType == 'grunt'){
+    console.log("grunt was clicked")
+  }
+  else if(targetType == 'jackal'){
+    console.log("jackal was clicked")
+  }
+  else if(targetType == 'elite'){
+    console.log("elite was clicked")
+  }
 }
 
 
