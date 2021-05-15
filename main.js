@@ -5,13 +5,7 @@ let template = /*html*/ `
     <div class="row d-flex justify-content-center">
       <div class="col-1 counter-display">
         <div class="counter-container text-center my-3 py-2">
-          <p id="click-counter-0">0</p>
-        </div>
-        <div class="counter-container text-center my-3 py-2">
-          <p id="click-counter-1">0</p>
-        </div>
-        <div class="counter-container text-center my-3 py-2">
-          <p id="click-counter-2">0</p>
+          <p id="click-counter">0</p>
         </div>
       </div>
 
@@ -51,9 +45,7 @@ let template = /*html*/ `
 //
 // MAIN GAME
 
-let gruntClicks = 0 // grunt, jackal, elite
-let jackalClicks = 0
-let eliteClicks = 0
+let targetClicks = 0 // grunt, jackal, elite
 
 function startGame(){
   const startDisplay = document.getElementById("start-screen")
@@ -65,8 +57,12 @@ function startGame(){
 }
 
 function targetClick(targetType){
+  let clickCounter = document.getElementById("click-counter")
+
   if(targetType == 'grunt'){
+    targetClicks++
     console.log("grunt was clicked")
+    clickCounter.innerHTML = targetClicks
   }
   else if(targetType == 'jackal'){
     console.log("jackal was clicked")
