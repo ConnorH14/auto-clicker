@@ -25,7 +25,7 @@ let template = /*html*/ `
       <div class="col-1 counter-display">
         <div class="row d-flex justify-content-center text-center">
           <div class="col-12 my-3">
-            <button onclick="purchaseAutoClick()" id="auto-clicker" class="btn btn-secondary locked-button">Marine</button>
+            <button onclick="purchaseMarine()" id="marine-upgrade" class="btn btn-secondary locked-button">Marine</button>
           </div>
           <div class="col-12 my-3">
             <button class="btn btn-secondary locked-button">???</button>
@@ -45,31 +45,57 @@ let template = /*html*/ `
 //
 // MAIN GAME
 
-let targetClicks = 0 // grunt, jackal, elite
+let targetClicks = 0 
+let autoClickerValue = 0
+let clickTrackerDisplay = document.getElementById("click-counter")
+let marineButton = document.getElementById("marine-upgrade")
 
 function startGame(){
+
   const startDisplay = document.getElementById("start-screen")
   startDisplay.classList.add("hidden")
 
   const gameDisplay = document.getElementById("game-display")
-  gameDisplay.innerHTML = template
-  //gameUpdate()
+  gameDisplay.classList.remove("hidden")
+
+  setInterval(function gameLoop(){
+
+    targetClicks = targetClicks + autoClickerValue
+
+    if(targetClicks >= 10){
+      marineButton.classList.remove("locked-button")
+    }else if(targetClicks < 10){
+      marineButton.classList.add("locked-button")
+    }
+
+    clickTrackerDisplay.innerText = targetClicks
+    
+  }, 1000);
+
 }
 
 function targetClick(targetType){
-  let clickCounter = document.getElementById("click-counter")
-
   if(targetType == 'grunt'){
     targetClicks++
-    console.log("grunt was clicked")
-    clickCounter.innerHTML = targetClicks
   }
   else if(targetType == 'jackal'){
-    console.log("jackal was clicked")
+    targetClicks = targetClicks + 2
+
+  }else if (targetType == 'elite'){
+    targetClicks = targetClicks + 5
   }
-  else if(targetType == 'elite'){
-    console.log("elite was clicked")
+  clickTrackerDisplay.innerText = targetClicks
+}
+
+function purchaseMarine(){
+  autoClickerValue++
+  targetClicks = targetClicks - 10
+  if(targetClicks < 10){
+    marineButton.classList.add("locked-button")
   }
 }
+
+
+
 
 
