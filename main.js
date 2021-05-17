@@ -43,9 +43,11 @@ function startGame(){
   const gameDisplay = document.getElementById("game-display")
   gameDisplay.classList.remove("hidden")
 
-  setInterval(function gameLoop(){
-
+  setInterval(function addPoints(){
     targetClicks = targetClicks + autoClickerValue
+  }, 1000)
+
+  setInterval(function gameLoop(){
 
     // PURCHASE GUN
 
@@ -79,7 +81,7 @@ function startGame(){
 
     clickTrackerDisplay.innerText = targetClicks
     
-  }, 1000);
+  }, 100);
 
   setInterval(function targetLoop(){
     let enemyGen = Math.floor(Math.random(1, 100) * 100)
