@@ -177,3 +177,14 @@ function purchaseSpartan(){
     spartanButton.classList.add("locked-button")
   }
 }
+
+function changeCursor(){
+  document.getElementById("change-cursor").classList.add("cursor-bleed")
+  document.getElementById("change-cursor").classList.remove("cursor-default")
+  setTimeout(function(){ 
+    document.getElementById("change-cursor").classList.add("cursor-default")
+    document.getElementById("change-cursor").classList.remove("cursor-bleed")
+  }, 100);
+
+  
+}
