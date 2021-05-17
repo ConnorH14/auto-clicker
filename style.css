@@ -39,10 +39,12 @@ body{
 
 .clicker-target-1{
   border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
-  background-color: #2600ff;
-  border: 10px solid black;
+  width: 10rem;
+  height: 10rem;
+  background-size: 7rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("assets/grunt-target.png");
   transition: 500ms;
   animation-name: moveOne;
   animation-duration: 3s;
@@ -51,17 +53,20 @@ body{
 }
 
 .clicker-target-1-col:hover .clicker-target-1{
-  width: 10rem;
-  height: 10rem;
+  width: 15rem;
+  height: 15rem;
+  background-size: 10rem;
   transition: 500ms;
 }
 
 .clicker-target-2{
   border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
-  background-color: #2600ff;
-  border: 10px solid black;
+  width: 10rem;
+  height: 10rem;
+  background-size: 7rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("assets/jackal-target.png");
   transition: 500ms;
   animation-name: moveTwo;
   animation-duration: 4s;
@@ -69,17 +74,20 @@ body{
 }
 
 .clicker-target-2-col:hover .clicker-target-2{
-  width: 10rem;
-  height: 10rem;
+  width: 15rem;
+  height: 15rem;
+  background-size: 10rem;
   transition: 500ms;
 }
 
 .clicker-target-3{
   border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
-  background-color: #2600ff;
-  border: 10px solid black;
+  width: 10rem;
+  height: 10rem;
+  background-size: 7rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("assets/elite-token.png");
   transition: 500ms;
   animation-name: moveThree;
   animation-duration: 3.5s;
@@ -88,8 +96,9 @@ body{
 }
 
 .clicker-target-3-col:hover .clicker-target-3{
-  width: 10rem;
-  height: 10rem;
+  width: 15rem;
+  height: 15rem;
+  background-size: 10rem;
   transition: 500ms;
 }
 
@@ -137,7 +146,7 @@ body{
 
 .locked-target{
   pointer-events: none;
-  background-color: red;
+  background-color: #ff000052;
 }
 
 .hidden {
