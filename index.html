@@ -50,20 +50,27 @@
           <div class="col-1 counter-display">
             <div class="row d-flex justify-content-center text-center">
               <div class="col-12 my-3">
-                <button onclick="purchaseGun()" id="gun-upgrade" class="btn btn-secondary locked-button">Bigger Gun!!!</button>
+                <button onclick="purchaseGun()" id="gun-upgrade" class="btn btn-secondary locked-button"></button>
               </div>
               <div class="col-12 my-3">
                 <button onclick="purchaseMarine()" id="marine-upgrade" class="btn btn-secondary locked-button"></button>
               </div>
               <div class="col-12 my-3">
-                <button class="btn btn-secondary locked-button">???</button>
+                <button onclick="purchaseElite()" id="elite-upgrade" class="btn btn-secondary locked-button"></button>
               </div>
               <div class="col-12 my-3">
-                <button class="btn btn-secondary locked-button">???</button>
+                <button onclick="purchaseSpartan()" id="spartan-upgrade" class="btn btn-secondary locked-button"></button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="row text-center">
+        <div class="col-3"><h3>Bigger Guns</h3><h4 id="gun-token"></h4></div>
+        <div class="col-3"><h3>Marines</h3><h4 id="marine-token"></h4></div>
+        <div class="col-3"><h3>Elites</h3><h4 id="elite-token"></h4></div>
+        <div class="col-3"><h3>Spartan</h3><h4 id="spartan-token"></h4></div>
       </div>
       
     </div>

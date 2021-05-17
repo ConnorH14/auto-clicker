@@ -23,6 +23,7 @@ body{
   background-image: url("assets/concrete-texture.png");
   background-repeat: none;
   height: 100%;
+  overflow-x: hidden;
 }
 
 .counter-display{
@@ -90,6 +91,18 @@ body{
   width: 10rem;
   height: 10rem;
   transition: 500ms;
+}
+
+.gun-token{
+  height: 50px;
+}
+
+.marine-token, .elite-token{
+  height: 100px;
+}
+
+.spartan-token{
+  height: 200px;
 }
 
 @keyframes moveOne {

@@ -4,6 +4,7 @@ document.oncontextmenu = new Function("return false;")
 // MAIN GAME
 
 let targetClicks = 0
+let clickTrackerDisplay = document.getElementById("click-counter")
 
 let gruntTarget = document.getElementById("grunt-target")
 let jackalTarget = document.getElementById("jackal-target")
@@ -12,14 +13,27 @@ let eliteTarget = document.getElementById("elite-target")
 let gunValue = 1
 let gunPrice = 5
 let gunButton = document.getElementById("gun-upgrade")
+let gunToken = document.getElementById("gun-token")
 
 let autoClickerValue = 0
-let clickTrackerDisplay = document.getElementById("click-counter")
 let marineButton = document.getElementById("marine-upgrade")
 let marinePrice = 10
+let marineToken = document.getElementById("marine-token")
+
+let eliteValue = 90
+let elitePrice = 20
+let eliteButton = document.getElementById("elite-upgrade")
+let eliteToken = document.getElementById("elite-token")
+
+let spartanValue = 0
+let spartanPrice = 1000
+let spartanButton = document.getElementById("spartan-upgrade")
+let spartanToken = document.getElementById("spartan-token")
 
 marineButton.innerText = `Marine: ${marinePrice}`
 gunButton.innerText = `Bigger Gun!!! ${gunPrice}`
+eliteButton.innerText = `More Elites: ${elitePrice}`
+spartanButton.innerText = `Spartan: ${spartanPrice}`
 
 function startGame(){
 
@@ -49,22 +63,38 @@ function startGame(){
       marineButton.classList.add("locked-button")
     }
 
+    // PURCHASE ELITE
+    if(targetClicks >= elitePrice && eliteValue >= 70){
+      eliteButton.classList.remove("locked-button")
+    }else if(targetClicks < elitePrice){
+      eliteButton.classList.add("locked-button")
+    }
+
+    // PURCHASE SPARTAN
+    if(targetClicks >= spartanPrice && spartanPrice <= 1000){
+      spartanButton.classList.remove("locked-button")
+    }else if(targetClicks < spartanPrice){
+      spartanButton.classList.add("locked-button")
+    }
+
     clickTrackerDisplay.innerText = targetClicks
     
   }, 1000);
 
-  setInterval(function test(){
+  setInterval(function targetLoop(){
     let enemyGen = Math.floor(Math.random(1, 100) * 100)
+
     gruntTarget.classList.add("locked-target")
     jackalTarget.classList.add("locked-target")
     eliteTarget.classList.add("locked-target")
-    if(enemyGen < 50){
+
+    if(enemyGen < 40){
       gruntTarget.classList.remove("locked-target")
     }
-    if(enemyGen >= 50 && enemyGen < 90){
+    if(enemyGen >= 40 && enemyGen < eliteValue){
       jackalTarget.classList.remove("locked-target")
     }
-    if(enemyGen >= 90){
+    if(enemyGen >= eliteValue){
       eliteTarget.classList.remove("locked-target")
     }
   }, 3000)
@@ -88,6 +118,7 @@ function targetClick(targetType){
 // ITEMS
 
 function purchaseGun(){
+  gunToken.innerHTML += `<img src="assets/ar-token.png" class="gun-token" alt=""></img>`
   targetClicks = targetClicks - gunPrice
   gunPrice = gunPrice * 2
   gunButton.innerText = `Bigger Gun!!! ${gunPrice}`
@@ -102,6 +133,7 @@ function purchaseGun(){
 }
 
 function purchaseMarine(){
+  marineToken.innerHTML += `<img src="assets/marine-token.png" class="marine-token" alt=""></img>`
   targetClicks = targetClicks - marinePrice
   marinePrice = marinePrice * 2
   marineButton.innerText = `Marine: ${marinePrice}`
@@ -115,9 +147,33 @@ function purchaseMarine(){
   }
 }
 
+function purchaseElite(){
+  eliteToken.innerHTML += `<img src="assets/elite-token.png" class="elite-token" alt=""></img>`
+  targetClicks = targetClicks - elitePrice
+  elitePrice = elitePrice * 2
+  eliteButton.innerText = `More Elites: ${elitePrice}`
+  eliteValue = eliteValue - 10
+  if(targetClicks < elitePrice){
+    eliteButton.classList.add("locked-button")
+  }
+  if(eliteValue < 70){
+    eliteButton.innerText = `More Elites: Sold Out`
+    eliteButton.classList.add("locked-button")
+  }
 
+}
 
-
-
-
-
+function purchaseSpartan(){
+  spartanToken.innerHTML += `<img src="assets/spartan-token.png" class="spartan-token" alt=""></img>`
+  targetClicks = targetClicks - spartanPrice
+  spartanPrice = spartanPrice + 1
+  spartanButton.innerText = `Spartan: ${spartanPrice}`
+  autoClickerValue = autoClickerValue * 20
+  if(targetClicks < spartanPrice){
+    marineButton.classList.add("locked-button")
+  }
+  if(spartanPrice > 1000){
+    spartanButton.innerText = `Spartan: Sold Out`
+    spartanButton.classList.add("locked-button")
+  }
+}
