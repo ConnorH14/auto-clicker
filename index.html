@@ -35,25 +35,25 @@
           </div>
     
           <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-1-col">
-            <div onclick="targetClick('grunt')" class="clicker-target-1 my-auto">
+            <div onclick="targetClick('grunt')" class="clicker-target-1 my-auto locked-target" id="grunt-target">
             </div>
           </div>
           <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-2-col">
-            <div onclick="targetClick('jackal')" class="clicker-target-2 my-auto">
+            <div onclick="targetClick('jackal')" class="clicker-target-2 my-auto locked-target" id="jackal-target">
             </div>
           </div>
           <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-3-col">
-            <div onclick="targetClick('elite')" class="clicker-target-3 my-auto">
+            <div onclick="targetClick('elite')" class="clicker-target-3 my-auto locked-target" id="elite-target">
             </div>
           </div>
     
           <div class="col-1 counter-display">
             <div class="row d-flex justify-content-center text-center">
               <div class="col-12 my-3">
-                <button onclick="purchaseMarine()" id="marine-upgrade" class="btn btn-secondary locked-button">Marine</button>
+                <button onclick="purchaseGun()" id="gun-upgrade" class="btn btn-secondary locked-button">Bigger Gun!!!</button>
               </div>
               <div class="col-12 my-3">
-                <button class="btn btn-secondary locked-button">???</button>
+                <button onclick="purchaseMarine()" id="marine-upgrade" class="btn btn-secondary locked-button"></button>
               </div>
               <div class="col-12 my-3">
                 <button class="btn btn-secondary locked-button">???</button>

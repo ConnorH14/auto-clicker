@@ -122,6 +122,11 @@ body{
   color: grey;
 }
 
+.locked-target{
+  pointer-events: none;
+  background-color: red;
+}
+
 .hidden {
   display: none;
 }

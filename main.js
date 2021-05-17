@@ -1,54 +1,25 @@
 document.oncontextmenu = new Function("return false;")
 
-let template = /*html*/ `
-  <div class="container-fluid py-5 mt-5">
-    <div class="row d-flex justify-content-center">
-      <div class="col-1 counter-display">
-        <div class="counter-container text-center my-3 py-2">
-          <p id="click-counter">0</p>
-        </div>
-      </div>
-
-      <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-1-col">
-        <div onclick="targetClick('grunt')" class="clicker-target-1 my-auto">
-        </div>
-      </div>
-      <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-2-col">
-        <div onclick="targetClick('jackal')" class="clicker-target-2 my-auto">
-        </div>
-      </div>
-      <div class="col-3 text-center mt-3 py-3 d-flex justify-content-center clicker-target-3-col">
-        <div onclick="targetClick('elite')" class="clicker-target-3 my-auto">
-        </div>
-      </div>
-
-      <div class="col-1 counter-display">
-        <div class="row d-flex justify-content-center text-center">
-          <div class="col-12 my-3">
-            <button onclick="purchaseMarine()" id="marine-upgrade" class="btn btn-secondary locked-button">Marine</button>
-          </div>
-          <div class="col-12 my-3">
-            <button class="btn btn-secondary locked-button">???</button>
-          </div>
-          <div class="col-12 my-3">
-            <button class="btn btn-secondary locked-button">???</button>
-          </div>
-          <div class="col-12 my-3">
-            <button class="btn btn-secondary locked-button">???</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-`
-
 //
 // MAIN GAME
 
-let targetClicks = 0 
+let targetClicks = 0
+
+let gruntTarget = document.getElementById("grunt-target")
+let jackalTarget = document.getElementById("jackal-target")
+let eliteTarget = document.getElementById("elite-target")
+
+let gunValue = 1
+let gunPrice = 5
+let gunButton = document.getElementById("gun-upgrade")
+
 let autoClickerValue = 0
 let clickTrackerDisplay = document.getElementById("click-counter")
 let marineButton = document.getElementById("marine-upgrade")
+let marinePrice = 10
+
+marineButton.innerText = `Marine: ${marinePrice}`
+gunButton.innerText = `Bigger Gun!!! ${gunPrice}`
 
 function startGame(){
 
@@ -62,9 +33,19 @@ function startGame(){
 
     targetClicks = targetClicks + autoClickerValue
 
-    if(targetClicks >= 10){
+    // PURCHASE GUN
+
+    if(targetClicks >= gunPrice && gunPrice < 500){
+      gunButton.classList.remove("locked-button")
+    }else if(targetClicks < gunPrice){
+      gunButton.classList.add("locked-button")
+    }
+
+    // PURCHASE MARINE
+
+    if(targetClicks >= marinePrice && marinePrice < 1000){
       marineButton.classList.remove("locked-button")
-    }else if(targetClicks < 10){
+    }else if(targetClicks < marinePrice){
       marineButton.classList.add("locked-button")
     }
 
@@ -72,28 +53,69 @@ function startGame(){
     
   }, 1000);
 
+  setInterval(function test(){
+    let enemyGen = Math.floor(Math.random(1, 100) * 100)
+    gruntTarget.classList.add("locked-target")
+    jackalTarget.classList.add("locked-target")
+    eliteTarget.classList.add("locked-target")
+    if(enemyGen < 50){
+      gruntTarget.classList.remove("locked-target")
+    }
+    if(enemyGen >= 50 && enemyGen < 90){
+      jackalTarget.classList.remove("locked-target")
+    }
+    if(enemyGen >= 90){
+      eliteTarget.classList.remove("locked-target")
+    }
+  }, 3000)
+
 }
 
 function targetClick(targetType){
   if(targetType == 'grunt'){
-    targetClicks++
+    targetClicks = targetClicks + gunValue
   }
   else if(targetType == 'jackal'){
-    targetClicks = targetClicks + 2
+    targetClicks = targetClicks + (gunValue * 2)
 
   }else if (targetType == 'elite'){
-    targetClicks = targetClicks + 5
+    targetClicks = targetClicks + (gunValue * 3)
   }
   clickTrackerDisplay.innerText = targetClicks
 }
 
+//
+// ITEMS
+
+function purchaseGun(){
+  targetClicks = targetClicks - gunPrice
+  gunPrice = gunPrice * 2
+  gunButton.innerText = `Bigger Gun!!! ${gunPrice}`
+  gunValue++
+  if(targetClicks < gunPrice){
+    gunButton.classList.add("locked-button")
+  }
+  if(gunPrice > 500){
+    gunButton.innerText = `Bigger Gun!!! Sold Out`
+    gunButton.classList.add("locked-button")
+  }
+}
+
 function purchaseMarine(){
+  targetClicks = targetClicks - marinePrice
+  marinePrice = marinePrice * 2
+  marineButton.innerText = `Marine: ${marinePrice}`
   autoClickerValue++
-  targetClicks = targetClicks - 10
-  if(targetClicks < 10){
+  if(targetClicks < marinePrice){
+    marineButton.classList.add("locked-button")
+  }
+  if(marinePrice > 1000){
+    marineButton.innerText = `Marine: Sold Out`
     marineButton.classList.add("locked-button")
   }
 }
+
+
 
 
 
